@@ -1,17 +1,20 @@
 /**
- * Welcome to Pebble.js!
- *
- * This is where you write your app.
+ * The purpose of this app is to start a coffee pot remotely from a Pebble watch. 
+ * You can use https://cloudpebble.net and select Pebble.js as the type of new project to write, build, and download the compiled version of this app.
+ * Check out https://pebble.github.io/pebblejs/ for great documentation of Pebble.js
+ * Check out https://developer.pebble.com/ for general Pebble developer documentation
  */
 
+// Dependencies
 var UI = require('ui');
 var ajax = require('ajax');
+
+// Globals
 var requestUrl = "https://jsonplaceholder.typicode.com/posts/";
 var requestOffParam = "1";
 var requestOnParam = "2";
 
-
-
+// Create menu options to choose On or Off
 var menu = new UI.Menu({
   sections: [{
     items: [{
@@ -22,7 +25,7 @@ var menu = new UI.Menu({
   }]
 });
 
-
+// Create menu actions for when item is selected
 menu.on('select', function(e) {
   if (e.item.title == "ON") {
     //Make Ajax request to turn on and show result
@@ -34,8 +37,10 @@ menu.on('select', function(e) {
   }
 });
 
+// Show menu as default screen
 menu.show();
 
+//Turn coffee pot on and show the result
 function coffeePotOn() {
   showWaitingCard();
   
@@ -54,6 +59,7 @@ function coffeePotOn() {
   }
 }
 
+// Turn coffee pot off and show the result
 function coffeePotOff() {
   showWaitingCard();
   
@@ -72,6 +78,7 @@ function coffeePotOff() {
   }
 }
 
+// Just in case something goes wrong, show that info
 function failureResponse(data) {
     
     var failureCard = new UI.Card({
@@ -84,7 +91,7 @@ function failureResponse(data) {
     });
 }
 
-
+// While we are waiting on a response, show that something is happening
 function showWaitingCard() {
   var waitingCard = new UI.Card({
     title: "Waiting..."
