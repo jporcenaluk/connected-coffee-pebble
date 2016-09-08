@@ -47,32 +47,32 @@ menu.show();
 var onCard = new UI.Card({
   title: 'TURNED ON'
 });
-onCard.on('click', 'back', function(e) {
-  menu.show();
+onCard.on('click', 'select', function(e) {
+  showMenu();
 });
 
 //Off Card
 var offCard = new UI.Card({
   title: 'TURNED OFF'
 });
-offCard.on('click', 'back', function(e) {
-  menu.show();
+offCard.on('click', 'select', function(e) {
+  showMenu();
 });
 
 //Waiting Card
 var waitingCard = new UI.Card({
   title: "Waiting..."
 });
-waitingCard.on('click', 'back', function(e) {
-  menu.show();
+waitingCard.on('click', 'select', function(e) {
+  showMenu();
 });
 
 //Failure Card
 var failureCard = new UI.Card({
   title: 'Error'
 });
-failureCard.on('click', 'back', function(e) {
-  menu.show();
+failureCard.on('click', 'select', function(e) {
+  showMenu();
 });
 
 /*** FUNCTIONS ***/
@@ -105,5 +105,13 @@ function coffeePotOff() {
 function failureResponse(data) {
     failureCard.body(data);
     failureCard.show();
-  
+}
+
+// Hide all but the show menu to remove them from window stack frame
+function showMenu() {
+  menu.show();
+  onCard.hide();
+  offCard.hide();
+  failureCard.hide();
+  waitingCard.hide();
 }
