@@ -41,64 +41,69 @@ menu.on('select', function(e) {
 // Show menu as default screen
 menu.show();
 
+/*** CARDS ***/
+
+//On Card
+var onCard = new UI.Card({
+  title: 'TURNED ON'
+});
+onCard.on('click', 'back', function(e) {
+  menu.show();
+});
+
+//Off Card
+var offCard = new UI.Card({
+  title: 'TURNED OFF'
+});
+offCard.on('click', 'back', function(e) {
+  menu.show();
+});
+
+//Waiting Card
+var waitingCard = new UI.Card({
+  title: "Waiting..."
+});
+waitingCard.on('click', 'back', function(e) {
+  menu.show();
+});
+
+//Failure Card
+var failureCard = new UI.Card({
+  title: 'Error'
+});
+failureCard.on('click', 'back', function(e) {
+  menu.show();
+});
+
+/*** FUNCTIONS ***/
+
 //Turn coffee pot on and show the result
 function coffeePotOn() {
-  showWaitingCard();
+  waitingCard.show();
   
   ajax({ url: requestUrl + requestOnParam }, coffeePotOnSuccess, failureResponse);
   
   function coffeePotOnSuccess(data) {
-  
-    var onCard = new UI.Card({
-        title: 'TURNED ON',
-        body: data
-      });
+    onCard.body(data);
     onCard.show();
-    onCard.on('click', function(e) {
-      menu.show();
-    });
   }
 }
 
 // Turn coffee pot off and show the result
 function coffeePotOff() {
-  showWaitingCard();
+  waitingCard.show();
   
   ajax({ url: requestUrl + requestOffParam }, coffeePotOffSuccess, failureResponse);
   
   function coffeePotOffSuccess(data) {
-  
-    var offCard = new UI.Card({
-      title: 'TURNED OFF',
-      body: data
-    });
+    offCard.body(data);
     offCard.show();
-    offCard.on('click', function(e) {
-      menu.show();
-    });
   }
 }
 
 // Just in case something goes wrong, show that info
 function failureResponse(data) {
-    
-    var failureCard = new UI.Card({
-        title: 'Error',
-        body: data
-    });
+    failureCard.body(data);
     failureCard.show();
-    failureCard.on('click', function(e) {
-      menu.show();
-    });
-}
-
-// While we are waiting on a response, show that something is happening
-function showWaitingCard() {
-  var waitingCard = new UI.Card({
-    title: "Waiting..."
-  });
-  waitingCard.show();
-  waitingCard.on('click', function(e) {
-    menu.show();
-  });
+  
 }
