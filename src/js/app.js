@@ -10,9 +10,10 @@ var UI = require('ui');
 var ajax = require('ajax');
 
 // Globals
-var requestUrl = "https://jsonplaceholder.typicode.com/posts/";
-var requestOffParam = "1";
-var requestOnParam = "2";
+var requestUrl = "http://192.168.1.3/send/vera/pressbutton?params=";
+var requestOnParam = "7";
+var requestOffParam = "8";
+
 
 // Create menu options to choose On or Off
 var menu = new UI.Menu({
